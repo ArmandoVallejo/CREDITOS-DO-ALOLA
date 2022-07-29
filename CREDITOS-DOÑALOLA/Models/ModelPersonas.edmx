@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PersonasDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="InfoPagos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Monto" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="PeriodoPago" Type="int" Nullable="false" />
+          <Property Name="FechaPago" Type="date" Nullable="false" />
+          <Property Name="Estatus" Type="bit" Nullable="false" />
+          <Property Name="IdPersona" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CantidadPrestada" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="FechaPrestamo" Type="datetime" Nullable="false" />
+          <Property Name="DiaCobro" Type="smallint" Nullable="false" />
+          <Property Name="MesesPrestamo" Type="int" Nullable="false" />
+          <Property Name="Intereses" Type="smallint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_InfoPagos_Persona">
+          <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+          <End Role="InfoPagos" Type="Self.InfoPagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InfoPagos">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PersonasDBModelStoreContainer">
+          <EntitySet Name="InfoPagos" EntityType="Self.InfoPagos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_InfoPagos_Persona" Association="Self.FK_InfoPagos_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="InfoPagos" EntitySet="InfoPagos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PersonasDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PersonasDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="InfoPagos" EntityType="PersonasDBModel.InfoPagos" />
+          <EntitySet Name="Persona" EntityType="PersonasDBModel.Persona" />
+          <AssociationSet Name="FK_InfoPagos_Persona" Association="PersonasDBModel.FK_InfoPagos_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="InfoPagos" EntitySet="InfoPagos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="InfoPagos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Monto" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="PeriodoPago" Type="Int32" Nullable="false" />
+          <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Estatus" Type="Boolean" Nullable="false" />
+          <Property Name="IdPersona" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Persona" Relationship="PersonasDBModel.FK_InfoPagos_Persona" FromRole="InfoPagos" ToRole="Persona" />
+        </EntityType>
+        <EntityType Name="Persona">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoPaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApellidoMaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CantidadPrestada" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FechaPrestamo" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DiaCobro" Type="Int16" Nullable="false" />
+          <Property Name="MesesPrestamo" Type="Int32" Nullable="false" />
+          <Property Name="Intereses" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="InfoPagos" Relationship="PersonasDBModel.FK_InfoPagos_Persona" FromRole="Persona" ToRole="InfoPagos" />
+        </EntityType>
+        <Association Name="FK_InfoPagos_Persona">
+          <End Type="PersonasDBModel.Persona" Role="Persona" Multiplicity="1" />
+          <End Type="PersonasDBModel.InfoPagos" Role="InfoPagos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persona">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InfoPagos">
+              <PropertyRef Name="IdPersona" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PersonasDBModelStoreContainer" CdmEntityContainer="PersonasDBEntities">
+          <EntitySetMapping Name="InfoPagos">
+            <EntityTypeMapping TypeName="PersonasDBModel.InfoPagos">
+              <MappingFragment StoreEntitySet="InfoPagos">
+                <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+                <ScalarProperty Name="FechaPago" ColumnName="FechaPago" />
+                <ScalarProperty Name="PeriodoPago" ColumnName="PeriodoPago" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persona">
+            <EntityTypeMapping TypeName="PersonasDBModel.Persona">
+              <MappingFragment StoreEntitySet="Persona">
+                <ScalarProperty Name="Intereses" ColumnName="Intereses" />
+                <ScalarProperty Name="MesesPrestamo" ColumnName="MesesPrestamo" />
+                <ScalarProperty Name="DiaCobro" ColumnName="DiaCobro" />
+                <ScalarProperty Name="FechaPrestamo" ColumnName="FechaPrestamo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CantidadPrestada" ColumnName="CantidadPrestada" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

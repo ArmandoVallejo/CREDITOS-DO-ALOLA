@@ -1,0 +1,119 @@
+﻿@model IEnumerable<CREDITOS_DOÑALOLA.Models.Persona>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InfoPagos</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidoPaterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApellidoMaterno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CantidadPrestada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaPrestamo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaCobro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MesesPrestamo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Intereses)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NombreCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MontoDebe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MontoPagado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MontoFinal)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApellidoPaterno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApellidoMaterno)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CantidadPrestada)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaPrestamo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaCobro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MesesPrestamo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Intereses)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MontoDebe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MontoPagado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MontoFinal)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PersonasDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PersonasDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="InfoPagos" EntityType="PersonasDBModel.InfoPagos" />
+    <EntitySet Name="Persona" EntityType="PersonasDBModel.Persona" />
+    <AssociationSet Name="FK_InfoPagos_Persona" Association="PersonasDBModel.FK_InfoPagos_Persona">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="InfoPagos" EntitySet="InfoPagos" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="InfoPagos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Monto" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="PeriodoPago" Type="Int32" Nullable="false" />
+    <Property Name="FechaPago" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Estatus" Type="Boolean" Nullable="false" />
+    <Property Name="IdPersona" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Persona" Relationship="PersonasDBModel.FK_InfoPagos_Persona" FromRole="InfoPagos" ToRole="Persona" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ApellidoPaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ApellidoMaterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CantidadPrestada" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Telefono" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="FechaPrestamo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DiaCobro" Type="Int16" Nullable="false" />
+    <Property Name="MesesPrestamo" Type="Int32" Nullable="false" />
+    <Property Name="Intereses" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="InfoPagos" Relationship="PersonasDBModel.FK_InfoPagos_Persona" FromRole="Persona" ToRole="InfoPagos" />
+  </EntityType>
+  <Association Name="FK_InfoPagos_Persona">
+    <End Type="PersonasDBModel.Persona" Role="Persona" Multiplicity="1" />
+    <End Type="PersonasDBModel.InfoPagos" Role="InfoPagos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InfoPagos">
+        <PropertyRef Name="IdPersona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PersonasDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="InfoPagos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Monto" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="PeriodoPago" Type="int" Nullable="false" />
+    <Property Name="FechaPago" Type="date" Nullable="false" />
+    <Property Name="Estatus" Type="bit" Nullable="false" />
+    <Property Name="IdPersona" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Persona">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ApellidoPaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ApellidoMaterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CantidadPrestada" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="FechaPrestamo" Type="datetime" Nullable="false" />
+    <Property Name="DiaCobro" Type="smallint" Nullable="false" />
+    <Property Name="MesesPrestamo" Type="int" Nullable="false" />
+    <Property Name="Intereses" Type="smallint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_InfoPagos_Persona">
+    <End Role="Persona" Type="Self.Persona" Multiplicity="1" />
+    <End Role="InfoPagos" Type="Self.InfoPagos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persona">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InfoPagos">
+        <PropertyRef Name="IdPersona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PersonasDBModelStoreContainer">
+    <EntitySet Name="InfoPagos" EntityType="Self.InfoPagos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_InfoPagos_Persona" Association="Self.FK_InfoPagos_Persona">
+      <End Role="Persona" EntitySet="Persona" />
+      <End Role="InfoPagos" EntitySet="InfoPagos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

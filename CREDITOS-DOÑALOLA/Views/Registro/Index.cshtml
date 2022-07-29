@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CREDITOS_DOÑALOLA.Models.Persona>
+
+@{
+    ViewBag.Title = "CREDITOS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DEUDORES</h2>
+
+<p>
+    @Html.ActionLink("Agregar", "Agregar")
+</p>
+<table class="table">
+    <tr>
+        <th hidden="hidden">
+            Id
+        </th>
+        <th>
+           Nombre
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Monto Debe
+        </th>
+        <th>
+            Monto Pagado
+        </th>
+        <th>
+            Monto Final
+        </th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td hidden="hidden">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.NombreCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    
+                </td>
+                <td>
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MontoFinal)
+                </td>
+            </tr>
+        }
+    }
+
+
+</table>
